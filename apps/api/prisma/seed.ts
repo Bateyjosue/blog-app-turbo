@@ -1,11 +1,25 @@
-import { faker } from '@faker-js/faker/.';
-import { PrismaClient } from '@prisma/client';
-import { Post } from 'generated/prisma';
+import { faker } from '@faker-js/faker';
+import { PrismaClient } from '../../../node_modules/@prisma/client';
 
 const prisma = new PrismaClient();
 
+type UserCreateInput = {
+  name: string;
+  email: string;
+  bio: string;
+  avatar: string;
+};
+
+type PostCreateInput = {
+  title: string;
+  slug: string;
+  content: string;
+  thumbnail: string;
+  published: boolean;
+  authorId: number;
+};
 async function main() {
-  const users = Array.from({ length: 10 }).map(() => ({
+  const users: UserCreateInput[] = Array.from({ length: 10 }).map(() => ({
     name: faker.person.fullName(),
     email: faker.internet.email(),
     bio: faker.lorem.sentence(),
@@ -17,7 +31,7 @@ async function main() {
   });
 
   // seed post too
-  const posts = Array.from({ length: 10 }).map(() => ({
+  const posts: PostCreateInput[] = Array.from({ length: 10 }).map(() => ({
     title: faker.lorem.sentence(),
     slug: generateSlug(faker.lorem.sentence()),
     content: faker.lorem.paragraph(3),
@@ -27,7 +41,7 @@ async function main() {
   }));
 
   await Promise.all(
-    posts.map(async (post: Post) => {
+    posts.map(async (post: PostCreateInput) => {
       await prisma.post.create({
         data: {
           ...post,
