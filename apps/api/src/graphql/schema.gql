@@ -2,6 +2,49 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Like {
+  id: Int!
+  post: Post!
+  author: User!
+  createAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: Int!
+  name: String!
+  email: String
+  bio: String
+  avatar: String
+  posts: [Post!]!
+  comments: [Comment!]!
+  likes: [Like!]!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Comment {
+  id: Int!
+  content: String
+  post: Post!
+  author: User!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Tag {
+  id: Int!
+  name: String!
+  posts: [Post!]!
+  createAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Post {
   """Example field (placeholder)"""
   exampleField: Int!
@@ -11,24 +54,39 @@ type Post {
   thumbnail: String
   published: Boolean!
   content: String!
+  author: User!
+  likes: [Like!]!
+  comments: [Comment!]!
+  tags: [Tag!]!
   createdAt: DateTime
   updatedAt: DateTime
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Query {
   posts: [Post!]!
   post(id: Int!): Post!
+  user(id: Int!): User!
+  comment(id: Int!): Comment!
+  tag(id: Int!): Tag!
+  like(id: Int!): Like!
 }
 
 type Mutation {
   createPost(createPostInput: CreatePostInput!): Post!
   updatePost(updatePostInput: UpdatePostInput!): Post!
   removePost(id: Int!): Post!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  removeComment(id: Int!): Comment!
+  createTag(createTagInput: CreateTagInput!): Tag!
+  updateTag(updateTagInput: UpdateTagInput!): Tag!
+  removeTag(id: Int!): Tag!
+  createLike(createLikeInput: CreateLikeInput!): Like!
+  updateLike(updateLikeInput: UpdateLikeInput!): Like!
+  removeLike(id: Int!): Like!
 }
 
 input CreatePostInput {
@@ -37,6 +95,50 @@ input CreatePostInput {
 }
 
 input UpdatePostInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateCommentInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCommentInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateTagInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTagInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateLikeInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateLikeInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!

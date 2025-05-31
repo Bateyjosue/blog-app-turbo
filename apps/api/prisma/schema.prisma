@@ -24,7 +24,6 @@ model User {
 
   posts Post[]
   comments Comment[]
-
   likes Like[]
 }
 
@@ -41,9 +40,7 @@ model Post {
   updatedAt DateTime @updatedAt
 
   comments Comment[]
-
   tags Tag[] @relation("PostTags")
-
   likes Like[]
 }
 
