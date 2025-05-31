@@ -101,13 +101,19 @@ input UpdatePostInput {
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  password: String!
+  email: String!
+  bio: String
+  avatar: String
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  password: String
+  email: String
+  bio: String
+  avatar: String
   id: Int!
 }
 
